@@ -9,6 +9,9 @@ html, body, #root, div {
   height: 100%
 }
 
+.fullscreen-enabled, #slide, div, img {
+  height: 100%;
+}
 .card {
   padding: 2em;
 }
