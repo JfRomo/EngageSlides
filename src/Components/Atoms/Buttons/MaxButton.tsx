@@ -3,17 +3,17 @@ import { BTNFS } from "@/Constants/styles"
 import { SlideContext } from "@/Providers/SlideProvider";
 import { useContext } from "react";
 
-export const MaxButton = ({elementRef}:any) => {
+export const MaxButton = () => {
 
-    const { isFullscreen, setIsFullscreen } = useContext(SlideContext)
+    const { setIsFullscreen, elementRef } = useContext(SlideContext)
 
     const handleFullscreen = async () => {
         if (!elementRef) return
-        const res = await elementRef?.current?.requestFullscreen()
+        await elementRef?.current?.requestFullscreen()
         setIsFullscreen(true)
     }
 
-    return !isFullscreen && <button
+    return <button
         className={BTNFS}
         onClick={handleFullscreen}
     >

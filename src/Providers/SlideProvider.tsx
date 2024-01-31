@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useRef, useState } from "react";
 
 interface SlideContextPros {
     isFullscreen: boolean,
@@ -10,15 +10,14 @@ interface SlideContextPros {
     slide: number,
     setSlide: (value: number) => void,
     shadowRange: number,
-    messagesArray: any[],
+    messagesArray: message[]
+    elementRef: any
 }
-
 interface message {
     name: string,
     message: string,
     dateTime: string,
 }
-
 export const SlideContext = createContext<SlideContextPros>({
     isFullscreen: false,
     setIsFullscreen: () => { },
@@ -30,6 +29,7 @@ export const SlideContext = createContext<SlideContextPros>({
     setSlide: () => { },
     shadowRange: 4,
     messagesArray: [],
+    elementRef: null
 })
 
 export const SlideProvider = ({ children }: { children: ReactNode }) => {
@@ -38,8 +38,9 @@ export const SlideProvider = ({ children }: { children: ReactNode }) => {
     const [viewNotifications, setViewNotifications] = useState<boolean>(false);
     const [viewSidebar, setViewSidebar] = useState<boolean>(false);
     const [shadowRange, setShadowRange] = useState<number>(4);
-    const [messagesArray, setMessagesArray] = useState<message[]>([]); // Adjust the type according to your needs
+    const [messagesArray, setMessagesArray] = useState<message[]>([]);
     const [slide, setSlide] = useState<number>(0);
+    const elementRef: any = useRef(null)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -51,8 +52,8 @@ export const SlideProvider = ({ children }: { children: ReactNode }) => {
 
     return <SlideContext.Provider
         value={{
-            isFullscreen,
-            setIsFullscreen,
+            isFullscreen, 
+            setIsFullscreen, 
             viewNotifications,
             setViewNotifications,
             viewSidebar,
@@ -61,6 +62,7 @@ export const SlideProvider = ({ children }: { children: ReactNode }) => {
             messagesArray,
             slide,
             setSlide,
+            elementRef
         }}
     >
         {children}

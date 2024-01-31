@@ -13,11 +13,11 @@ export const MinButton = () => {
         setIsFullscreen(false)
     }
 
-    return isFullscreen &&
-        <button
-            className={BTNFS}
-            onClick={handleFullscreenOut}
-        >
-            <Minimize className="hover:stroke-black" />
-        </button>
+    return (<button
+        className={BTNFS}
+        onClick={handleFullscreenOut}
+    >
+        <Minimize className="hover:stroke-black" />
+    </button>
+    )
 }
